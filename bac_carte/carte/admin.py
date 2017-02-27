@@ -1,6 +1,8 @@
 import os, tempfile
 
 import time
+
+from django.conf import settings
 from django.contrib import admin
 from django import forms
 from django.contrib.admin import widgets
@@ -20,9 +22,13 @@ from bac_carte.carte.models import Carte, TissuImage, Composant, Marque, \
     Utilisation, Composition
 
 
-class MySelectWidget(widgets.FilteredSelectMultiple):
+class MySelectWidget(forms.SelectMultiple):
+    def __init__(self, attrs={}, choices=()):
+        attrs['style'] = 'width: 100%'
+        super(MySelectWidget, self).__init__(attrs=attrs,
+                                             choices=choices)
+
     def render_option(self, selected_choices, option_value, option_label):
-        print("hhhh")
         if option_value is None:
             option_value = ''
         option_value = force_text(option_value)
@@ -33,8 +39,19 @@ class MySelectWidget(widgets.FilteredSelectMultiple):
                 selected_choices.remove(option_value)
         else:
             selected_html = ''
-        return format_html('<option value="{}"{}>lolololl</option>', option_value, selected_html, force_text(option_label))
-
+        img = TissuImage.objects.get(pk=option_value).image.url
+        return mark_safe(('<option value="{}"{} '
+                       'style="'
+                       'background-image: url({});'
+                       'background-size: contain;'
+                       'background-position: right;'
+                       'background-repeat: no-repeat;'
+                       'vertical-align: middle;'
+                       'height: 50px;">{}</option>'.format(
+            option_value,
+            selected_html,
+            img,
+            force_text(option_label))))
 
 class CompositionInline(admin.TabularInline):
     model = Composition
@@ -118,15 +135,22 @@ export_card_to_pdf_with_price.short_description = "Exporter les cartes en " \
 class CarteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CarteForm, self).__init__(*args, **kwargs)
-        # self.fields['images'].widget = MySelectWidget(verbose_name="Pictogrammes", is_stacked=False)
+        self.fields['images'].widget = MySelectWidget(
+            choices=self.fields['images'].widget.choices)
 
 
 @admin.register(Carte)
 class CarteAdmin(admin.ModelAdmin):
     inlines = [CompositionInline, ]
-    filter_vertical = ['utilisations', 'images']
-    list_display = ['ref', 'marque', 'largeur', 'raccord', 'price']
+    filter_vertical = ['utilisations']
+    list_display = ['ref', 'marque', 'largeur', 'raccord', 'prix']
     actions = [export_card_to_pdf, export_card_to_pdf_with_price]
+    fieldsets = [
+        ("Info", {
+            'fields': [('ref', 'marque' ), ('largeur', 'raccord', 'prix'),
+                       'utilisations', 'images']}
+         ),
+    ]
     form = CarteForm
 
 

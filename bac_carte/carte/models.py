@@ -41,7 +41,6 @@ class TissuImage(models.Model):
         return self.name
 
 
-
 class Carte(models.Model):
     marque = models.ForeignKey(Marque)
     ref = models.CharField(max_length=75,
@@ -53,7 +52,7 @@ class Carte(models.Model):
     raccord = models.FloatField(help_text="Raccord",
                                 blank=True,
                                 null=True)
-    price = models.FloatField(help_text="Prix",
+    prix = models.FloatField(help_text="Prix",
                               blank=True,
                               null=True)
     compositions = models.ManyToManyField(Composant,

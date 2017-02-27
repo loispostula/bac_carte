@@ -65,7 +65,7 @@ def export_to_pdf(cartes, show_price=False):
     }, autoescape=False)
     template_text = r"""
     {% autoescape off %}
-    \documentclass[a5paper,11pt]{article}
+    \documentclass[a4paper,11pt]{article}
     \usepackage[a6paper, landscape, margin=1cm]{geometry}
     \usepackage[utf8x]{inputenc}
     \usepackage{libertine} % or \usepackage{fourier} or \usepackage[utopia]{mathdesign}
@@ -84,7 +84,7 @@ def export_to_pdf(cartes, show_price=False):
     \multicolumn{2}{|l|}{\large\textbf{ {{ carte.marque }}  } }        \\ \hline
     Ref:                          & {{ carte.ref }}               \\ \hline
     {% if show_price %}
-    Prix:                         & {% if carte.price %} {{ carte.price }} € {% endif %}               \\ \hline
+    Prix:                         & {% if carte.prix %} {{ carte.prix }} € {% endif %}               \\ \hline
     {% endif %}
     Largeur:                      & {% if carte.largeur %} {{ carte.largeur }} cm {% endif %}           \\ \hline
     Raccord:                      & {% if carte.raccord %} {{ carte.raccord }} cm {% endif %}             \\ \hline

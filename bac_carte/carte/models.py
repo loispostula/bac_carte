@@ -83,5 +83,5 @@ class Composition(models.Model):
                                               "le tissu")
 
     def __str__(self):
-        return "{}% - {}".format(self.composant,
-                                 self.pourcentage * 100)
+        return "{} - {}%".format(self.composant,
+                                 round(self.pourcentage * 100))

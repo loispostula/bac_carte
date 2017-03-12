@@ -43,6 +43,10 @@ class TissuImage(models.Model):
 
 class Carte(models.Model):
     marque = models.ForeignKey(Marque)
+    description = models.CharField(max_length=120,
+                                   help_text="Description",
+                                   blank=True,
+                                   null=True)
     ref = models.CharField(max_length=75,
                            help_text="Référence",
                            unique=True)

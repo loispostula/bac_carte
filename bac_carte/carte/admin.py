@@ -82,6 +82,9 @@ def export_to_pdf(cartes, show_price=False):
     \begin{tabularx}{0.90\textwidth}{|@{}p{0.25\linewidth} R|}
     \hline
     \multicolumn{2}{|l|}{\large\textbf{ {{ carte.marque }}  } }        \\ \hline
+    {% if carte.description %}
+    Description:                  & {{ carte.description }}        \\ \hline
+    {% endif %}
     Ref:                          & {{ carte.ref }}               \\ \hline
     {% if show_price %}
     Prix:                         & {% if carte.prix %} {{ carte.prix }} € {% endif %}               \\ \hline
@@ -143,11 +146,11 @@ class CarteForm(forms.ModelForm):
 class CarteAdmin(admin.ModelAdmin):
     inlines = [CompositionInline, ]
     filter_vertical = ['utilisations']
-    list_display = ['ref', 'marque', 'largeur', 'raccord', 'prix']
+    list_display = ['ref', 'description', 'marque', 'largeur', 'raccord', 'prix']
     actions = [export_card_to_pdf, export_card_to_pdf_with_price]
     fieldsets = [
         ("Info", {
-            'fields': [('ref', 'marque' ), ('largeur', 'raccord', 'prix'),
+            'fields': [('ref', 'description', 'marque' ), ('largeur', 'raccord', 'prix'),
                        'utilisations', 'images']}
          ),
     ]

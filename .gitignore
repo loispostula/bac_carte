@@ -6,3 +6,4 @@ __pycache__
 *.pyc
 uwsgi_params
 *sql*
+local_settings.py

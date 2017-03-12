@@ -1,2 +1,8 @@
 venv
 .idea/
+media/
+static/
+__pycache__
+*.pyc
+uwsgi_params
+*sql*

@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+DEBUG_LOG_DIR = "/var/log/app-logs/django_debug.log"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

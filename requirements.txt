@@ -1,3 +1,4 @@
 django>=1.10
 Pillow==3.0.0
 sorl-thumbnail
+suit>=2.0.2

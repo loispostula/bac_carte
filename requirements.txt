@@ -1,5 +1,4 @@
 django>=1.10
-Pillow
+Pillow==3.0.0
 sorl-thumbnail
 wsgiref
-Pillow

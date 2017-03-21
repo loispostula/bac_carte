@@ -1,7 +1,7 @@
 django>=1.10
 Pillow==3.0.0
 sorl-thumbnail
-suit>=2.0.2
 boto
 django-storages
 psycopg2
+-e git://github.com/darklow/django-suit.git@v2#egg=django-suit

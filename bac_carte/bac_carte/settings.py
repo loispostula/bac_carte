@@ -25,7 +25,7 @@ SECRET_KEY = 'pzs5ei1#kb#0pv_(!y$)i6k%(70-u&r=owu_*_3pa0zo-bmt+v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bac-carte.eu-central-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', 'bac.postu.la', 'bac-carte.eu-central-1.elasticbeanstalk.com']
 
 
 # Application definition

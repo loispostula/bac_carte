@@ -134,7 +134,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static/')
 
@@ -142,8 +141,12 @@ AWS_STORAGE_BUCKET_NAME = 'bac-carte'
 AWS_ACCESS_ID = 'AKIAJE6BO6UDIIUHJU2A'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'bac_carte.custom_storages.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE ='bac_carte.custom_storages.MediaStorage'
 try:
     from local_settings import *
 except ImportError:

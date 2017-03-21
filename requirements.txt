@@ -4,3 +4,4 @@ sorl-thumbnail
 suit>=2.0.2
 boto
 django-storages
+psycopg2

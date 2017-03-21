@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bac_carte.carte',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ if 'RDS_DB_NAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.sqlite3',
+            'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
         }
     }
@@ -133,11 +134,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static/')
 
+AWS_STORAGE_BUCKET_NAME = 'bac-carte'
+AWS_ACCESS_ID = 'AKIAJE6BO6UDIIUHJU2A'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 try:
     from local_settings import *
 except ImportError:

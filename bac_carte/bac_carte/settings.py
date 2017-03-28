@@ -150,9 +150,9 @@ LOGGING = {
             'propagate': True,
         },
         'django': {
-            'handlers':['console'],
+            'handlers':['log_file'],
             'propagate': True,
-            'level':'WARN',
+            'level':'DEBUG',
         },
         'django.db.backends': {
             'handlers': ['console', 'log_file'],

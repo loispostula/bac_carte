@@ -115,56 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-DEBUG_LOG_DIR = "/var/log/app-logs/django_debug.log"
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    # How to format the output
-    'formatters': {
-        'standard': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
-        },
-    },
-    # Log handlers (where to go)
-    'handlers': {
-        'log_file': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': DEBUG_LOG_DIR,
-            'maxBytes': 50000,
-            'backupCount': 2,
-            'formatter': 'standard',
-        },
-        'console':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
-            'formatter': 'standard'
-        },
-    },
-    # Loggers (where does the log come from)
-    'loggers': {
-        'repackager': {
-            'handlers': ['console', 'log_file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django': {
-            'handlers':['log_file'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-        'django.db.backends': {
-            'handlers': ['console', 'log_file'],
-            'level': 'WARN',
-            'propagate': False,
-        },
-        '': {
-            'handlers': ['console', 'log_file'],
-            'level': 'DEBUG',
-        },
-    }
-}
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -183,18 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-AWS_STORAGE_BUCKET_NAME = 'bac-carte'
-AWS_ACCESS_ID = 'AKIAJE6BO6UDIIUHJU2A'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'bac_carte.custom_storages.StaticStorage'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE ='bac_carte.custom_storages.MediaStorage'
 try:
     from local_settings import *
 except ImportError:

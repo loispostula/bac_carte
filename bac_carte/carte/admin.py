@@ -82,7 +82,7 @@ def export_to_pdf(cartes, show_price=False):
     {% for carte in cartes %}
     \begin{tabularx}{0.90\textwidth}{|@{}p{0.25\linewidth} R|}
     \hline
-    \multicolumn{2}{|l|}{\large\textbf{ {% latex_escape carte.marque %}        \\ \hline
+    \multicolumn{2}{|l|}{\large\textbf{ {% latex_escape carte.marque %} }}      \\ \hline
     {% if carte.description %}
     Description:                  & {% latex_escape carte.description %}        \\ \hline
     {% endif %}

@@ -86,7 +86,7 @@ def export_to_pdf(cartes, show_price=False):
     {% if carte.description %}
     Description:                  & {% latex_escape carte.description %}        \\ \hline
     {% endif %}
-    Ref:                          & {{ carte.ref }}               \\ \hline
+    Ref:                          & {% latex_escape carte.ref %}               \\ \hline
     {% if show_price %}
     Prix:                         & {% if carte.prix %} {{ carte.prix }} € {% endif %}               \\ \hline
     {% endif %}

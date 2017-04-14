@@ -68,7 +68,7 @@ def export_to_pdf(cartes, show_price=False):
     {% autoescape off %}
     \documentclass[a4paper,11pt]{article}
     \usepackage[a6paper, landscape, margin=1cm]{geometry}
-\usepackage[utf8x]{inputenc}
+    \usepackage[utf8x]{inputenc}
     \usepackage{libertine} % or \usepackage{fourier} or \usepackage[utopia]{mathdesign}
     \usepackage{graphicx}
     \usepackage{tabularx}
@@ -82,9 +82,9 @@ def export_to_pdf(cartes, show_price=False):
     {% for carte in cartes %}
     \begin{tabularx}{0.90\textwidth}{|@{}p{0.25\linewidth} R|}
     \hline
-    \multicolumn{2}{|l|}{\large\textbf{ {{ latex_escape carte.marque }}  } }        \\ \hline
+    \multicolumn{2}{|l|}{\large\textbf{ {% latex_escape carte.marque %}        \\ \hline
     {% if carte.description %}
-    Description:                  & {{ latex_escape carte.description }}        \\ \hline
+    Description:                  & {% latex_escape carte.description %}        \\ \hline
     {% endif %}
     Ref:                          & {{ carte.ref }}               \\ \hline
     {% if show_price %}
